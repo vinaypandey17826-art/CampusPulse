@@ -4,7 +4,8 @@ import { RegisteredEventsList } from '../components/user/RegisteredEventsList';
 import { BookmarkedEventsList } from '../components/user/BookmarkedEventsList';
 import { RegistrationModal } from '../components/events/RegistrationModal';
 import { TicketPassModal } from '../components/events/TicketPassModal';
-import { Ticket, Bookmark, Sparkles } from 'lucide-react';
+import { Breadcrumbs } from '../components/common/Breadcrumbs';
+import { Ticket, Bookmark } from 'lucide-react';
 
 export function MyEventsPage() {
   const { events, registrations, bookmarkedIds, cancelRegistration, registerForEvent } = useEvents();
@@ -22,45 +23,51 @@ export function MyEventsPage() {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
+      {/* Breadcrumbs */}
+      <Breadcrumbs items={[{ label: 'Student Portal' }]} />
+
       {/* Header */}
-      <div>
-        <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+      <div className="border-b border-[#E2E2E2] pb-4">
+        <div className="text-[10px] uppercase font-bold tracking-widest text-[#1B3A8C] mb-1">
+          Student Portal
+        </div>
+        <h1 className="font-heading text-2xl sm:text-4xl font-bold uppercase tracking-tight text-[#111111]">
           My Passes & Saved Events
         </h1>
-        <p className="text-sm text-slate-500 mt-1">
+        <p className="text-xs text-[#6B6B6B] mt-1">
           Access your digital admission passes or revisit bookmarked activities.
         </p>
       </div>
 
       {/* Tabs */}
-      <div className="flex items-center gap-2 border-b border-slate-200">
+      <div className="flex items-center gap-4 border-b border-[#E2E2E2]">
         <button
           onClick={() => setActiveTab('registered')}
-          className={`flex items-center gap-2 pb-3 px-2 text-sm font-bold border-b-2 transition-all ${
+          className={`flex items-center gap-2 pb-3 text-xs font-bold uppercase tracking-wider border-b-2 transition-colors ${
             activeTab === 'registered'
-              ? 'border-brand-600 text-brand-700'
-              : 'border-transparent text-slate-500 hover:text-slate-900'
+              ? 'border-[#1B3A8C] text-[#1B3A8C]'
+              : 'border-transparent text-[#6B6B6B] hover:text-[#111111]'
           }`}
         >
-          <Ticket className="w-4 h-4" />
+          <Ticket className="w-3.5 h-3.5" />
           <span>Registered Passes</span>
-          <span className="px-2 py-0.5 rounded-full text-xs bg-slate-100 text-slate-700">
+          <span className="px-1.5 py-0.2 rounded-[2px] text-[10px] bg-[#FAFAFA] text-[#111111] border border-[#E2E2E2]">
             {registrations.length}
           </span>
         </button>
 
         <button
           onClick={() => setActiveTab('saved')}
-          className={`flex items-center gap-2 pb-3 px-2 text-sm font-bold border-b-2 transition-all ${
+          className={`flex items-center gap-2 pb-3 text-xs font-bold uppercase tracking-wider border-b-2 transition-colors ${
             activeTab === 'saved'
-              ? 'border-brand-600 text-brand-700'
-              : 'border-transparent text-slate-500 hover:text-slate-900'
+              ? 'border-[#1B3A8C] text-[#1B3A8C]'
+              : 'border-transparent text-[#6B6B6B] hover:text-[#111111]'
           }`}
         >
-          <Bookmark className="w-4 h-4" />
-          <span>Bookmarked Events</span>
-          <span className="px-2 py-0.5 rounded-full text-xs bg-slate-100 text-slate-700">
+          <Bookmark className="w-3.5 h-3.5" />
+          <span>Saved Events</span>
+          <span className="px-1.5 py-0.2 rounded-[2px] text-[10px] bg-[#FAFAFA] text-[#111111] border border-[#E2E2E2]">
             {bookmarkedEvents.length}
           </span>
         </button>
@@ -99,3 +106,5 @@ export function MyEventsPage() {
     </div>
   );
 }
+
+export default MyEventsPage;

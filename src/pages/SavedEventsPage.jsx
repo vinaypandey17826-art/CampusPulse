@@ -3,7 +3,7 @@ import { useEvents } from '../context/EventContext';
 import { BookmarkedEventsList } from '../components/user/BookmarkedEventsList';
 import { RegistrationModal } from '../components/events/RegistrationModal';
 import { TicketPassModal } from '../components/events/TicketPassModal';
-import { Bookmark } from 'lucide-react';
+import { Breadcrumbs } from '../components/common/Breadcrumbs';
 
 export function SavedEventsPage() {
   const { events, bookmarkedIds, registerForEvent } = useEvents();
@@ -19,18 +19,20 @@ export function SavedEventsPage() {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
+      {/* Breadcrumb (Step 3) */}
+      <Breadcrumbs items={[{ label: 'Saved Events' }]} />
+
       {/* Header */}
-      <div>
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-rose-50 text-rose-700 text-xs font-bold border border-rose-100 mb-2">
-          <Bookmark className="w-3.5 h-3.5 fill-rose-600" />
-          <span>Curated List</span>
+      <div className="border-b border-[#E2E2E2] pb-4">
+        <div className="text-[10px] uppercase font-bold tracking-widest text-[#1B3A8C] mb-1">
+          Favorites
         </div>
-        <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+        <h1 className="font-heading text-2xl sm:text-4xl font-bold uppercase tracking-tight text-[#111111]">
           Saved Events
         </h1>
-        <p className="text-sm text-slate-500 mt-1">
-          Explore bookmarked campus activities you plan to attend.
+        <p className="text-xs text-[#6B6B6B] mt-1">
+          Curated shortlist of campus activities you plan to attend.
         </p>
       </div>
 

@@ -1,74 +1,81 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '../common/Button';
-import { Sparkles, Calendar, ArrowRight, ShieldCheck, Ticket } from 'lucide-react';
-import { useAuth } from '../../context/AuthContext';
+import { ArrowRight, Ticket } from 'lucide-react';
 
 export function HeroBanner({ totalEvents = 0, totalRegistrations = 0 }) {
-  const { isAdmin } = useAuth();
-
   return (
-    <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-950 text-white p-8 sm:p-12 lg:p-16 shadow-2xl border border-indigo-900/40">
-      {/* Decorative blurred backdrop orbs */}
-      <div className="absolute -top-24 -left-24 w-96 h-96 bg-brand-500/20 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl pointer-events-none" />
+    <div className="relative overflow-hidden bg-white border border-[#E2E2E2] rounded-[2px] p-8 sm:p-12 lg:p-16 mb-12">
+      {/* Large outlined display word "Events" behind/beside the heading (Reference style) */}
+      <div
+        aria-hidden="true"
+        className="stroke-text font-heading text-7xl sm:text-9xl lg:text-[11rem] font-bold uppercase select-none absolute right-2 sm:right-8 -bottom-4 sm:bottom-0 opacity-40 pointer-events-none leading-none tracking-tighter"
+      >
+        Events
+      </div>
 
-      <div className="relative max-w-3xl space-y-6">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-brand-300 text-xs font-bold border border-white/15 backdrop-blur-md">
-          <Sparkles className="w-3.5 h-3.5 text-brand-400" />
-          <span>The University Experience, Unified</span>
+      <div className="relative max-w-2xl space-y-6 z-10">
+        <div className="text-[11px] font-bold uppercase tracking-widest text-[#1B3A8C]">
+          University Event Portal
         </div>
 
-        <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.15]">
-          Discover, register & thrive in <span className="bg-gradient-to-r from-brand-300 via-indigo-200 to-purple-300 bg-clip-text text-transparent">campus events.</span>
+        {/* Headline without awkward word wrap */}
+        <h1 className="font-heading text-3xl sm:text-5xl lg:text-[3.25rem] font-medium tracking-tight text-[#111111] leading-[1.12] [text-wrap:balance]">
+          Events at ABES Engineering College
         </h1>
 
-        <p className="text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed">
-          No more lost WhatsApp posters or broken registration forms. CampusConnect is your single hub to explore hackathons, cultural festivals, tech workshops, and sports tournaments.
+        <p className="text-sm sm:text-base text-[#6B6B6B] leading-relaxed max-w-xl font-normal">
+          Hackathons, cultural fests, sports and workshops. Affiliated to Dr. A.P.J. Abdul Kalam Technical University (AKTU).
         </p>
 
-        {/* CTA Buttons */}
-        <div className="flex flex-wrap items-center gap-4 pt-2">
+        {/* CTA Actions */}
+        <div className="flex flex-wrap items-center gap-3 pt-2">
           <Link to="/events">
-            <Button variant="primary" size="lg" className="shadow-lg shadow-brand-500/30">
-              <span>Explore Upcoming Events</span>
-              <ArrowRight className="w-4 h-4" />
+            <Button variant="primary" size="md">
+              <span>Explore All Events</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </Button>
           </Link>
 
-          <Link to="/my-events">
-            <Button
-              variant="outline"
-              size="lg"
-              className="bg-white/10 text-white border-white/20 hover:bg-white/20 backdrop-blur-sm"
-            >
-              <Ticket className="w-4 h-4" />
-              <span>View My Passes</span>
+          <Link to="/my-registrations">
+            <Button variant="outline" size="md">
+              <Ticket className="w-3.5 h-3.5" />
+              <span>My Registrations</span>
             </Button>
           </Link>
         </div>
 
-        {/* Metrics Row */}
-        <div className="pt-6 border-t border-white/10 flex flex-wrap items-center gap-6 sm:gap-10 text-xs text-slate-300">
+        {/* Stats Row: Only displays real stats > 0; hides any showing "0+" */}
+        <div className="pt-6 border-t border-[#E2E2E2] flex flex-wrap items-center gap-8 text-xs text-[#6B6B6B]">
+          {totalEvents > 0 && (
+            <div>
+              <strong className="font-heading text-2xl font-bold text-[#111111] block">
+                {totalEvents}+
+              </strong>
+              <span className="uppercase text-[10px] tracking-wider font-semibold text-[#6B6B6B]">
+                Active Campus Events
+              </span>
+            </div>
+          )}
+
+          {totalRegistrations > 0 && (
+            <div>
+              <strong className="font-heading text-2xl font-bold text-[#111111] block">
+                {totalRegistrations}+
+              </strong>
+              <span className="uppercase text-[10px] tracking-wider font-semibold text-[#6B6B6B]">
+                Student RSVPs
+              </span>
+            </div>
+          )}
+
           <div>
-            <strong className="text-xl font-extrabold text-white block">
-              {totalEvents}+
-            </strong>
-            <span>Active Campus Events</span>
-          </div>
-          <div className="h-8 w-px bg-white/15 hidden sm:block" />
-          <div>
-            <strong className="text-xl font-extrabold text-white block">
-              {totalRegistrations}+
-            </strong>
-            <span>Student RSVPs</span>
-          </div>
-          <div className="h-8 w-px bg-white/15 hidden sm:block" />
-          <div>
-            <strong className="text-xl font-extrabold text-white block">
+            <strong className="font-heading text-2xl font-bold text-[#111111] block">
               4 Tracks
             </strong>
-            <span>Tech, Arts, Sports & Workshop</span>
+            <span className="uppercase text-[10px] tracking-wider font-semibold text-[#6B6B6B]">
+              Tech, Arts, Sports & Workshop
+            </span>
           </div>
         </div>
       </div>

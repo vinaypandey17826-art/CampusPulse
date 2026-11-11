@@ -8,8 +8,8 @@ import { DateSortDropdown } from '../components/events/DateSortDropdown';
 import { EventGrid } from '../components/events/EventGrid';
 import { RegistrationModal } from '../components/events/RegistrationModal';
 import { TicketPassModal } from '../components/events/TicketPassModal';
+import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { CATEGORIES } from '../data/seedEvents';
-import { Calendar, Filter } from 'lucide-react';
 
 export function EventsPage() {
   const { events, registerForEvent } = useEvents();
@@ -115,18 +115,24 @@ export function EventsPage() {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
+      {/* Breadcrumb on inner page (Step 3) */}
+      <Breadcrumbs items={[{ label: 'Events' }]} />
+
       {/* Header */}
-      <div className="space-y-2">
-        <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-          Explore Campus Events
+      <div className="border-b border-[#E2E2E2] pb-4">
+        <div className="text-[10px] uppercase font-bold tracking-widest text-[#1B3A8C] mb-1">
+          Campus Calendar
+        </div>
+        <h1 className="font-heading text-2xl sm:text-4xl font-bold uppercase tracking-tight text-[#111111]">
+          Events Directory
         </h1>
-        <p className="text-sm text-slate-500 max-w-2xl">
-          Search, filter by track, and register for student activities across all departments.
+        <p className="text-xs text-[#6B6B6B] mt-1">
+          Browse upcoming academic workshops, hackathons, sports tournaments and cultural programs.
         </p>
       </div>
 
-      {/* Control Bar: Search & Sort */}
+      {/* Control Bar: Search & Sort visible at top */}
       <div className="flex flex-col sm:flex-row items-center gap-3">
         <div className="w-full sm:flex-1">
           <SearchBar
@@ -140,7 +146,7 @@ export function EventsPage() {
         </div>
       </div>
 
-      {/* Category Pills */}
+      {/* Category Pills as Flat Tags with active in #1B3A8C */}
       <CategoryFilter
         selectedCategory={selectedCategory}
         onSelectCategory={setSelectedCategory}
@@ -148,9 +154,9 @@ export function EventsPage() {
       />
 
       {/* Active Filter Status & Count */}
-      <div className="flex items-center justify-between text-xs text-slate-500 pb-2 border-b border-slate-200/80">
+      <div className="flex items-center justify-between text-xs text-[#6B6B6B] pb-2 border-b border-[#E2E2E2]">
         <span>
-          Showing <strong className="text-slate-800">{filteredEvents.length}</strong> of{' '}
+          Showing <strong className="text-[#111111]">{filteredEvents.length}</strong> of{' '}
           {events.length} total events
           {selectedCategory !== 'all' && ` in ${selectedCategory}`}
           {debouncedQuery && ` matching "${debouncedQuery}"`}
@@ -159,14 +165,14 @@ export function EventsPage() {
         {(selectedCategory !== 'all' || debouncedQuery) && (
           <button
             onClick={handleClearFilters}
-            className="font-semibold text-brand-600 hover:text-brand-800 hover:underline"
+            className="font-bold uppercase tracking-wider text-[11px] text-[#1B3A8C] hover:underline"
           >
             Reset Filters
           </button>
         )}
       </div>
 
-      {/* Grid */}
+      {/* 4-column Grid */}
       <EventGrid
         events={filteredEvents}
         onRegisterClick={(target) => setSelectedEventForReg(target)}
@@ -195,3 +201,5 @@ export function EventsPage() {
     </div>
   );
 }
+
+export default EventsPage;

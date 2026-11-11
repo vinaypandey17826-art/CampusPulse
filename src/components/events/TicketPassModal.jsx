@@ -3,7 +3,7 @@ import confetti from 'canvas-confetti';
 import { Modal } from '../common/Modal';
 import { Button } from '../common/Button';
 import { formatDateRange } from '../../utils/formatters';
-import { Sparkles, Calendar, MapPin, User, CheckCircle2, Ticket, QrCode } from 'lucide-react';
+import { Calendar, MapPin, User, CheckCircle2, Ticket, QrCode } from 'lucide-react';
 
 export function TicketPassModal({ isOpen, onClose, registration }) {
   useEffect(() => {
@@ -26,75 +26,72 @@ export function TicketPassModal({ isOpen, onClose, registration }) {
     <Modal
       isOpen={isOpen}
       onClose={onClose}
-      title="Registration Confirmed!"
+      title="Registration Confirmed"
       maxWidth="max-w-md"
     >
       <div className="space-y-6">
         {/* Success Header */}
-        <div className="text-center space-y-1">
-          <div className="w-12 h-12 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto mb-2">
-            <CheckCircle2 className="w-7 h-7" />
+        <div className="text-center space-y-1.5 pb-2">
+          <div className="w-12 h-12 rounded-[2px] bg-[#FAFAFA] text-[#1B3A8C] border border-[#E2E2E2] flex items-center justify-center mx-auto mb-2">
+            <CheckCircle2 className="w-6 h-6" />
           </div>
-          <h4 className="text-lg font-bold text-slate-900">You're on the guest list!</h4>
-          <p className="text-xs text-slate-500">
+          <h4 className="text-lg font-heading font-normal text-univ-text">Registration Confirmed</h4>
+          <p className="text-xs text-univ-muted">
             A copy of this digital event pass has been added to your Passes tab.
           </p>
         </div>
 
         {/* Digital Boarding Pass Ticket */}
-        <div className="relative rounded-2xl bg-gradient-to-br from-slate-900 to-indigo-950 text-white p-5 shadow-xl border border-indigo-900/50 overflow-hidden">
-          {/* Subtle background glow */}
-          <div className="absolute -right-12 -top-12 w-32 h-32 bg-brand-500/20 rounded-full blur-2xl" />
-
+        <div className="relative rounded-[2px] bg-[#FFFFFF] text-univ-text p-5 border border-[#E2E2E2]">
           {/* Ticket Header */}
-          <div className="flex items-center justify-between pb-4 border-b border-white/10">
+          <div className="flex items-center justify-between pb-3 border-b border-[#E2E2E2]">
             <div className="flex items-center gap-2">
-              <Ticket className="w-4 h-4 text-brand-400" />
-              <span className="text-xs font-bold tracking-wider uppercase text-slate-300">
+              <Ticket className="w-4 h-4 text-[#1B3A8C]" />
+              <span className="text-[11px] font-bold tracking-wider uppercase text-univ-text font-mono">
                 Official Event Pass
               </span>
             </div>
-            <span className="px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+            <span className="px-2 py-0.5 rounded-[2px] text-[10px] font-mono font-bold bg-[#FAFAFA] text-[#1B3A8C] border border-[#E2E2E2]">
               CONFIRMED
             </span>
           </div>
 
           {/* Ticket Body */}
-          <div className="py-4 space-y-3">
+          <div className="py-4 space-y-3.5">
             <div>
-              <p className="text-[10px] uppercase font-bold text-slate-400 tracking-wider">
+              <p className="text-[10px] uppercase font-bold text-univ-muted tracking-wider">
                 Event
               </p>
-              <h5 className="font-bold text-base text-white leading-snug">
+              <h5 className="font-heading font-medium text-base text-univ-text leading-snug mt-0.5">
                 {registration.eventTitle}
               </h5>
             </div>
 
-            <div className="grid grid-cols-2 gap-2 text-xs">
+            <div className="grid grid-cols-2 gap-3 text-xs">
               <div>
-                <p className="text-[10px] uppercase font-bold text-slate-400">Date & Time</p>
-                <p className="text-slate-200 font-medium">
+                <p className="text-[10px] uppercase font-bold text-univ-muted">Date & Time</p>
+                <p className="text-univ-text font-medium mt-0.5">
                   {formatDateRange(registration.eventStartDate)}
                 </p>
               </div>
               <div>
-                <p className="text-[10px] uppercase font-bold text-slate-400">Venue</p>
-                <p className="text-slate-200 font-medium truncate">
+                <p className="text-[10px] uppercase font-bold text-univ-muted">Venue</p>
+                <p className="text-univ-text font-medium truncate mt-0.5">
                   {registration.eventVenue}
                 </p>
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-2 text-xs pt-2 border-t border-white/10">
+            <div className="grid grid-cols-2 gap-3 text-xs pt-3 border-t border-[#E2E2E2]">
               <div>
-                <p className="text-[10px] uppercase font-bold text-slate-400">Attendee</p>
-                <p className="text-white font-semibold truncate">
+                <p className="text-[10px] uppercase font-bold text-univ-muted">Attendee</p>
+                <p className="text-univ-text font-semibold truncate mt-0.5">
                   {registration.studentName}
                 </p>
               </div>
               <div>
-                <p className="text-[10px] uppercase font-bold text-slate-400">Student ID</p>
-                <p className="font-mono text-brand-300 font-bold">
+                <p className="text-[10px] uppercase font-bold text-univ-muted">Student ID</p>
+                <p className="font-mono text-[#1B3A8C] font-bold mt-0.5">
                   {registration.studentId}
                 </p>
               </div>
@@ -102,15 +99,15 @@ export function TicketPassModal({ isOpen, onClose, registration }) {
           </div>
 
           {/* Ticket Footer / Verification Code */}
-          <div className="pt-3 border-t border-dashed border-white/20 flex items-center justify-between">
+          <div className="pt-3 border-t border-dashed border-[#E2E2E2] flex items-center justify-between bg-[#FAFAFA] -mx-5 -mb-5 p-4 rounded-b-[2px]">
             <div>
-              <p className="text-[9px] uppercase font-bold text-slate-400">Ticket Pass Code</p>
-              <p className="text-sm font-mono font-extrabold tracking-widest text-brand-300">
+              <p className="text-[9px] uppercase font-bold text-univ-muted tracking-wider">Pass Verification Code</p>
+              <p className="text-sm font-mono font-bold tracking-wider text-univ-text">
                 {registration.ticketCode}
               </p>
             </div>
-            <div className="w-9 h-9 rounded-lg bg-white/10 flex items-center justify-center text-white/80">
-              <QrCode className="w-6 h-6" />
+            <div className="w-10 h-10 rounded-[2px] bg-white border border-[#E2E2E2] flex items-center justify-center text-univ-text">
+              <QrCode className="w-6 h-6 text-univ-text" />
             </div>
           </div>
         </div>

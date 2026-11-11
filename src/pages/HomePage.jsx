@@ -6,7 +6,7 @@ import { CategoryHighlights } from '../components/home/CategoryHighlights';
 import { EventCard } from '../components/events/EventCard';
 import { RegistrationModal } from '../components/events/RegistrationModal';
 import { TicketPassModal } from '../components/events/TicketPassModal';
-import { ArrowRight, Flame } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Button } from '../components/common/Button';
 
 export function HomePage() {
@@ -14,8 +14,8 @@ export function HomePage() {
   const [selectedEventForReg, setSelectedEventForReg] = useState(null);
   const [issuedPass, setIssuedPass] = useState(null);
 
-  // Take top 3 featured events
-  const featuredEvents = events.slice(0, 3);
+  // Take top 4 events for the 4-column grid
+  const featuredEvents = events.slice(0, 4);
 
   const handleRegistrationSubmit = async (eventId, studentData) => {
     const createdPass = await registerForEvent(eventId, studentData);
@@ -23,38 +23,34 @@ export function HomePage() {
   };
 
   return (
-    <div className="space-y-16">
-      {/* Hero Section */}
+    <div className="space-y-12">
+      {/* Hero Section (Step 3: College Branding) */}
       <HeroBanner
         totalEvents={events.length}
         totalRegistrations={registrations.length}
       />
 
-      {/* Featured / Trending Events */}
+      {/* Featured Events (4-column grid matching reference) */}
       <section className="space-y-6">
-        <div className="flex items-end justify-between">
-          <div className="space-y-1">
-            <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-amber-600 bg-amber-50 px-2.5 py-1 rounded-full border border-amber-200">
-              <Flame className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
-              <span>Trending on Campus</span>
+        <div className="flex items-end justify-between border-b border-[#E2E2E2] pb-3">
+          <div>
+            <div className="text-[10px] uppercase font-bold tracking-widest text-[#1B3A8C] mb-1">
+              Highlights
             </div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-              Featured Highlights
+            <h2 className="font-heading text-xl sm:text-2xl font-bold uppercase tracking-tight text-[#111111]">
+              Upcoming Campus Events
             </h2>
-            <p className="text-sm text-slate-500">
-              High-capacity events happening across campus over the coming weeks.
-            </p>
           </div>
           <Link
             to="/events"
-            className="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 hover:text-brand-800"
+            className="text-xs font-bold uppercase tracking-wider text-[#1B3A8C] hover:underline flex items-center gap-1"
           >
             <span>View All ({events.length})</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {featuredEvents.map((evt) => (
             <EventCard
               key={evt.id}
@@ -64,11 +60,11 @@ export function HomePage() {
           ))}
         </div>
 
-        <div className="text-center sm:hidden pt-4">
+        <div className="text-center sm:hidden pt-2">
           <Link to="/events">
             <Button variant="outline" size="md" className="w-full">
               <span>View All Events ({events.length})</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-3.5 h-3.5" />
             </Button>
           </Link>
         </div>
@@ -97,3 +93,5 @@ export function HomePage() {
     </div>
   );
 }
+
+export default HomePage;

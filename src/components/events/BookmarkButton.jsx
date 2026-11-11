@@ -13,32 +13,32 @@ export function BookmarkButton({ eventId, className = '', size = 'md' }) {
   };
 
   const sizeClasses = {
-    sm: 'p-1.5',
-    md: 'p-2',
-    lg: 'p-2.5',
+    sm: 'p-1',
+    md: 'p-1.5',
+    lg: 'p-2',
   };
 
   const iconSizes = {
-    sm: 'w-4 h-4',
-    md: 'w-5 h-5',
-    lg: 'w-6 h-6',
+    sm: 'w-3.5 h-3.5',
+    md: 'w-4 h-4',
+    lg: 'w-5 h-5',
   };
 
   return (
     <button
       onClick={handleClick}
       type="button"
-      className={`rounded-full transition-all duration-150 backdrop-blur-md shadow-md ${
+      className={`rounded-[2px] transition-colors border ${
         isBookmarked
-          ? 'bg-rose-50 text-rose-600 hover:bg-rose-100'
-          : 'bg-white/80 text-slate-700 hover:bg-white hover:text-slate-900'
+          ? 'bg-white text-[#DC2626] border-[#DC2626]'
+          : 'bg-white/95 text-[#111111] hover:text-[#1B3A8C] border-[#E2E2E2]'
       } ${sizeClasses[size] || sizeClasses.md} ${className}`}
       aria-label={isBookmarked ? 'Remove from bookmarks' : 'Add to bookmarks'}
       title={isBookmarked ? 'Remove bookmark' : 'Bookmark event'}
     >
       <Bookmark
-        className={`${iconSizes[size] || iconSizes.md} transition-transform active:scale-75 ${
-          isBookmarked ? 'fill-rose-600 text-rose-600' : ''
+        className={`${iconSizes[size] || iconSizes.md} ${
+          isBookmarked ? 'fill-[#DC2626] text-[#DC2626]' : ''
         }`}
       />
     </button>

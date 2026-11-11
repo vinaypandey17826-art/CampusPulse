@@ -1,6 +1,5 @@
 import React from 'react';
 import { Calendar, Users, Ticket, TrendingUp } from 'lucide-react';
-import { calculateCapacityPercentage } from '../../utils/formatters';
 
 export function AdminStats({ events = [], registrations = [] }) {
   const totalEvents = events.length;
@@ -13,29 +12,21 @@ export function AdminStats({ events = [], registrations = [] }) {
       label: 'Published Events',
       value: totalEvents,
       icon: Calendar,
-      color: 'text-indigo-600',
-      bg: 'bg-indigo-50 border-indigo-100',
     },
     {
       label: 'Total RSVPs Issued',
       value: totalRegistrations,
       icon: Ticket,
-      color: 'text-brand-600',
-      bg: 'bg-brand-50 border-brand-100',
     },
     {
       label: 'Total Seat Capacity',
       value: totalCapacity.toLocaleString(),
       icon: Users,
-      color: 'text-emerald-600',
-      bg: 'bg-emerald-50 border-emerald-100',
     },
     {
       label: 'Overall Fill Rate',
       value: `${avgOccupancy}%`,
       icon: TrendingUp,
-      color: 'text-amber-600',
-      bg: 'bg-amber-50 border-amber-100',
     },
   ];
 
@@ -46,18 +37,18 @@ export function AdminStats({ events = [], registrations = [] }) {
         return (
           <div
             key={idx}
-            className="p-5 rounded-3xl bg-white border border-slate-200/90 shadow-sm flex items-center justify-between"
+            className="p-5 bg-white border border-[#E2E2E2] rounded-[2px] flex items-center justify-between"
           >
             <div>
-              <p className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-1">
+              <p className="text-[10px] font-bold uppercase tracking-wider text-[#6B6B6B] mb-1">
                 {item.label}
               </p>
-              <h4 className="text-2xl font-extrabold text-slate-900 tracking-tight">
+              <h4 className="font-heading text-2xl font-bold text-[#111111] tracking-tight">
                 {item.value}
               </h4>
             </div>
-            <div className={`w-12 h-12 rounded-2xl ${item.bg} border flex items-center justify-center ${item.color}`}>
-              <Icon className="w-6 h-6" />
+            <div className="w-9 h-9 rounded-[2px] bg-[#FAFAFA] border border-[#E2E2E2] flex items-center justify-center text-[#1B3A8C]">
+              <Icon className="w-4 h-4" />
             </div>
           </div>
         );

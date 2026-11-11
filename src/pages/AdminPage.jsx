@@ -6,8 +6,9 @@ import { AdminEventTable } from '../components/admin/AdminEventTable';
 import { EventFormModal } from '../components/admin/EventFormModal';
 import { ConfirmDialog } from '../components/common/ConfirmDialog';
 import { Button } from '../components/common/Button';
+import { Breadcrumbs } from '../components/common/Breadcrumbs';
 import { SearchBar } from '../components/events/SearchBar';
-import { Plus, Shield, ShieldAlert, Sparkles } from 'lucide-react';
+import { Plus, Shield, ShieldAlert } from 'lucide-react';
 
 export function AdminPage() {
   const { isAdmin, setRole } = useAuth();
@@ -24,19 +25,22 @@ export function AdminPage() {
   // If user is currently in Student mode, display role switcher gate
   if (!isAdmin) {
     return (
-      <div className="max-w-lg mx-auto my-16 bg-white rounded-3xl border border-slate-200 p-8 text-center space-y-4 shadow-sm">
-        <div className="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mx-auto border border-amber-100">
-          <ShieldAlert className="w-7 h-7" />
-        </div>
-        <h2 className="text-xl font-bold text-slate-900">Administrator Access Required</h2>
-        <p className="text-sm text-slate-500 leading-relaxed">
-          You are currently previewing CampusConnect as a <strong>Student</strong>. Switch to Administrator Mode to manage, edit, and create campus events.
-        </p>
-        <div className="pt-2">
-          <Button variant="primary" size="md" onClick={() => setRole('admin')}>
-            <Shield className="w-4 h-4 mr-1" />
-            <span>Switch to Admin Mode</span>
-          </Button>
+      <div className="space-y-6">
+        <Breadcrumbs items={[{ label: 'Admin Portal' }]} />
+        <div className="max-w-lg mx-auto my-12 bg-white rounded-[2px] border border-[#E2E2E2] p-8 text-center space-y-4 shadow-none">
+          <div className="w-12 h-12 rounded-[2px] bg-[#FAFAFA] text-[#1B3A8C] flex items-center justify-center mx-auto border border-[#E2E2E2]">
+            <ShieldAlert className="w-6 h-6" />
+          </div>
+          <h2 className="text-xl font-heading font-normal text-univ-text">Administrator Access Required</h2>
+          <p className="text-sm text-univ-muted leading-relaxed">
+            You are currently previewing CampusConnect as a <strong className="text-univ-text">Student</strong>. Switch to Administrator Mode to manage, edit, and create campus events.
+          </p>
+          <div className="pt-2">
+            <Button variant="primary" size="md" onClick={() => setRole('admin')}>
+              <Shield className="w-4 h-4 mr-1.5" />
+              <span>Switch to Admin Mode</span>
+            </Button>
+          </div>
         </div>
       </div>
     );
@@ -82,18 +86,20 @@ export function AdminPage() {
 
   return (
     <div className="space-y-8">
+      <Breadcrumbs items={[{ label: 'Admin Portal' }]} />
+
       {/* Top Header & Action */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E2E2E2] pb-6">
         <div>
-          <div className="flex items-center gap-2">
-            <h1 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          <div className="flex items-center gap-2.5">
+            <h1 className="text-2xl sm:text-3xl font-heading font-normal text-univ-text tracking-tight">
               Event Management Portal
             </h1>
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-800 border border-amber-200">
+            <span className="px-2 py-0.5 rounded-[2px] text-[11px] font-bold uppercase tracking-wider bg-[#FAFAFA] text-univ-text border border-[#E2E2E2]">
               Admin
             </span>
           </div>
-          <p className="text-sm text-slate-500 mt-1">
+          <p className="text-sm text-univ-muted mt-1">
             Publish upcoming campus events, monitor RSVPs, and manage event schedules.
           </p>
         </div>
@@ -103,7 +109,6 @@ export function AdminPage() {
           size="md"
           icon={Plus}
           onClick={handleOpenCreateModal}
-          className="shadow-md shadow-brand-500/20"
         >
           Create New Event
         </Button>
@@ -122,8 +127,8 @@ export function AdminPage() {
               placeholder="Filter by title, organizer, or venue..."
             />
           </div>
-          <p className="text-xs text-slate-500 self-end sm:self-center">
-            Showing <strong className="text-slate-800">{filteredEvents.length}</strong> of {events.length} events
+          <p className="text-xs text-univ-muted self-end sm:self-center font-mono">
+            Showing <strong className="text-univ-text">{filteredEvents.length}</strong> of {events.length} events
           </p>
         </div>
 

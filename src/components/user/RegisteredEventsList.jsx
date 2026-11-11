@@ -4,7 +4,7 @@ import { formatDateRange } from '../../utils/formatters';
 import { Button } from '../common/Button';
 import { ConfirmDialog } from '../common/ConfirmDialog';
 import { TicketPassModal } from '../events/TicketPassModal';
-import { Calendar, MapPin, Ticket, AlertCircle, ArrowRight } from 'lucide-react';
+import { Calendar, MapPin, Ticket } from 'lucide-react';
 import { EmptyState } from '../common/EmptyState';
 
 export function RegisteredEventsList({
@@ -17,10 +17,10 @@ export function RegisteredEventsList({
   if (registrations.length === 0) {
     return (
       <EmptyState
-        title="No Event Passes Yet"
-        description="You haven't registered for any campus events. Explore upcoming events and claim your pass!"
+        title="No Event Passes"
+        description="You have not registered for any campus events yet. Explore upcoming activities and reserve your seat."
         icon={Ticket}
-        actionLabel="Explore Events"
+        actionLabel="Explore All Events"
         onAction={() => window.location.assign('/events')}
       />
     );
@@ -32,45 +32,44 @@ export function RegisteredEventsList({
         {registrations.map((reg) => (
           <div
             key={reg.id}
-            className="bg-white rounded-3xl border border-slate-200/90 p-5 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between"
+            className="bg-white rounded-[2px] border border-[#E2E2E2] p-5 hover:border-[#111111] transition-colors flex flex-col justify-between"
           >
             <div className="space-y-3">
               <div className="flex items-start justify-between gap-3">
-                <span className="font-mono text-xs font-bold px-2.5 py-1 rounded-lg bg-brand-50 text-brand-700 border border-brand-100 flex items-center gap-1.5">
+                <span className="font-mono text-xs font-bold px-2 py-0.5 rounded-[2px] bg-[#FAFAFA] text-[#1B3A8C] border border-[#E2E2E2] flex items-center gap-1.5">
                   <Ticket className="w-3.5 h-3.5" />
                   {reg.ticketCode}
                 </span>
-                <span className="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-100">
-                  Confirmed
+                <span className="text-[10px] uppercase font-bold tracking-wider text-[#1B3A8C] bg-[#FAFAFA] px-2 py-0.5 rounded-[2px] border border-[#E2E2E2]">
+                  Confirmed Pass
                 </span>
               </div>
 
               <div>
                 <Link
                   to={`/events/${reg.eventId}`}
-                  className="font-bold text-base text-slate-900 hover:text-brand-600 transition-colors line-clamp-1"
+                  className="font-heading font-bold text-sm sm:text-base text-[#111111] hover:text-[#1B3A8C] transition-colors line-clamp-1"
                 >
                   {reg.eventTitle}
                 </Link>
-                <div className="mt-2 space-y-1 text-xs text-slate-500">
+                <div className="mt-2 space-y-1 text-xs text-[#6B6B6B]">
                   <div className="flex items-center gap-1.5">
-                    <Calendar className="w-3.5 h-3.5 text-slate-400" />
+                    <Calendar className="w-3.5 h-3.5 text-[#1B3A8C]" />
                     <span>{formatDateRange(reg.eventStartDate)}</span>
                   </div>
                   <div className="flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-slate-400" />
+                    <MapPin className="w-3.5 h-3.5 text-[#1B3A8C]" />
                     <span className="truncate">{reg.eventVenue}</span>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between gap-2">
+            <div className="pt-4 mt-4 border-t border-[#E2E2E2] flex items-center justify-between gap-2">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => setSelectedPass(reg)}
-                className="text-xs font-semibold"
               >
                 View Pass
               </Button>
@@ -78,7 +77,7 @@ export function RegisteredEventsList({
               <button
                 type="button"
                 onClick={() => setCancellingRegistration(reg)}
-                className="text-xs font-semibold text-rose-600 hover:text-rose-800 hover:underline p-1"
+                className="text-xs font-bold uppercase tracking-wider text-[#DC2626] hover:underline p-1"
               >
                 Cancel RSVP
               </button>
@@ -102,7 +101,7 @@ export function RegisteredEventsList({
           isOpen={Boolean(cancellingRegistration)}
           onClose={() => setCancellingRegistration(null)}
           title="Cancel RSVP"
-          message={`Are you sure you want to cancel your registration for "${cancellingRegistration.eventTitle}"? Your spot will be released to other students.`}
+          message={`Are you sure you want to cancel your pass for "${cancellingRegistration.eventTitle}"? Your seat will be released immediately.`}
           confirmText="Yes, Cancel RSVP"
           confirmVariant="danger"
           onConfirm={() => {
